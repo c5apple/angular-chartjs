@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, AfterViewInit, OnChanges, SimpleChanges, ViewChild, ElementRef, Input } from '@angular/core';
 import { Chart, ChartType, ChartData, ChartOptions } from 'chart.js';
 
 @Component({
@@ -6,7 +6,7 @@ import { Chart, ChartType, ChartData, ChartOptions } from 'chart.js';
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
 })
-export class ChartComponent implements AfterViewInit {
+export class ChartComponent implements AfterViewInit, OnChanges {
 
   @ViewChild('myCanvas') myCanvas: ElementRef;
 
@@ -14,13 +14,23 @@ export class ChartComponent implements AfterViewInit {
   @Input() data: ChartData;
   @Input() options: ChartOptions;
 
+  chart: Chart;
+
   ngAfterViewInit() {
     const canvas = this.myCanvas.nativeElement;
     this.drawChart(canvas);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.chart !== undefined && changes.type !== undefined) {
+      // TODO data,optionも更新したい
+      this.chart.config.type = changes.type.currentValue;
+      this.chart.update();
+    }
+  }
+
   drawChart(ctx: string | CanvasRenderingContext2D | HTMLCanvasElement | ArrayLike<CanvasRenderingContext2D | HTMLCanvasElement>) {
-    return new Chart(ctx, {
+    this.chart = new Chart(ctx, {
       type: this.type,
       data: this.data,
       options: this.options

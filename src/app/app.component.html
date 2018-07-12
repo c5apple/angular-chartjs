@@ -1,3 +1,27 @@
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="line">line
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="bar">bar
+</label>
+<!-- <label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="horizontalBar">horizontalBar
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="radar">radar
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="doughnut">doughnut
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="polarArea">polarArea
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="bubble">bubble
+</label>
+<label>
+  <input type="radio" name="type" [(ngModel)]="type1" value="pie">pie
+</label> -->
 <app-chart [type]="type1" [data]="data1" [options]="options1"></app-chart>
 <app-chart [type]="type2" [data]="data2" [options]="options2"></app-chart>
 <app-chart [type]="type3" [data]="data3" [options]="options3"></app-chart>
