@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
-import { Chart, ChartData, ChartOptions } from 'chart.js';
+import { Component, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Chart, ChartType, ChartData, ChartOptions } from 'chart.js';
 
 @Component({
   selector: 'app-chart',
@@ -10,40 +10,9 @@ export class ChartComponent implements AfterViewInit {
 
   @ViewChild('myCanvas') myCanvas: ElementRef;
 
-  data: ChartData = {
-    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-    datasets: [{
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255,99,132,1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
-  };
-
-  options: ChartOptions = {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: true
-        }
-      }]
-    }
-  };
+  @Input() type: ChartType | string;
+  @Input() data: ChartData;
+  @Input() options: ChartOptions;
 
   ngAfterViewInit() {
     const canvas = this.myCanvas.nativeElement;
@@ -52,7 +21,7 @@ export class ChartComponent implements AfterViewInit {
 
   drawChart(ctx: string | CanvasRenderingContext2D | HTMLCanvasElement | ArrayLike<CanvasRenderingContext2D | HTMLCanvasElement>) {
     return new Chart(ctx, {
-      type: 'line',
+      type: this.type,
       data: this.data,
       options: this.options
     });
