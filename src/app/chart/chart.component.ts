@@ -22,9 +22,16 @@ export class ChartComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.chart !== undefined && changes.type !== undefined) {
-      // TODO data,optionも更新したい
-      this.chart.config.type = changes.type.currentValue;
+    if (this.chart !== undefined) {
+      if (changes.type !== undefined) {
+        this.chart.config.type = changes.type.currentValue;
+      }
+      if (changes.data !== undefined) {
+        this.chart.config.data = changes.data.currentValue;
+      }
+      if (changes.options !== undefined) {
+        this.chart.config.options = changes.options.currentValue;
+      }
       this.chart.update();
     }
   }
