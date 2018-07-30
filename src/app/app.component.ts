@@ -75,6 +75,11 @@ export class AppComponent {
         'rgba(255, 159, 64, 1)'
       ],
       borderWidth: 1
+    },
+    {
+      label: '# of Votes',
+      data: [3, 2, 5, 3, 19, 12],
+      type: 'line'
     }]
   };
 
