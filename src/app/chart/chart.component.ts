@@ -8,7 +8,7 @@ import { Chart, ChartType, ChartData, ChartOptions } from 'chart.js';
 })
 export class ChartComponent implements AfterViewInit, OnChanges {
 
-  @ViewChild('myCanvas') myCanvas: ElementRef;
+  @ViewChild('myCanvas', { static: true }) myCanvas: ElementRef;
 
   @Input() type: ChartType | string;
   @Input() data: ChartData;
